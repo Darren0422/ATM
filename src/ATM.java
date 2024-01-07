@@ -3,16 +3,18 @@ import java.util.Scanner;
 public class ATM {
     public static void main(String[] args) throws Exception {
 
+        // Initial scanner
         Scanner scanner = new Scanner(System.in);
 
-        // Create a bank
+        // Create a bank object
         Bank bank = new Bank("ABSA");
 
-        // Add a user to the bank
+        // Add a user object to the bank
         User user = bank.AddUser("John", "Doe", "1234");
 
         User currentUser;
-
+        // Stays in the login prompt untill successful login
+        // Then stays in main menu prompt until user quits
         while (true) {
             currentUser = ATM.menuLogin(bank, scanner);
 
@@ -21,12 +23,19 @@ public class ATM {
 
     }
 
+    /**
+     * Processes the user login and prompts for the user credentials 
+     * @param bank the bank object 
+     * @param scanner the scanner object used for the user input
+     * @return Authorised user after a successful login 
+     */
     public static User menuLogin(Bank bank, Scanner scanner) {
 
         String userID;
         String pin;
         User authorisedUser;
 
+        // Continues looping until a successful login
         do {
 
             System.out.println("Welcome to " + bank.getName());
@@ -37,6 +46,7 @@ public class ATM {
             System.out.println("Please enter your user pin:");
             pin = scanner.nextLine();
 
+            // Checks the user object matches the ID and pin combo
             authorisedUser = bank.userLogin(userID, pin);
             if (authorisedUser == null) {
                 System.out.println("Incorrect user ID/pin combination. Please try again.");
@@ -48,6 +58,13 @@ public class ATM {
 
     }
 
+    /**
+     * Main user menu with options that the user can choose, namely: view transaction history, withdraw funds,
+     * deposit funds, transfer funds, or quit the application.
+     * @param user the logged in User object
+     * @param scanner the scanner object used for the user input
+     * @return The updated User object after the selected choice is completed.
+     */
     public static User menuUser(User user, Scanner scanner) {
         user.userAccountSummary();
 
@@ -97,7 +114,7 @@ public class ATM {
                 break;
         }
 
-        // redisplay the menu unless the user wants to quit.
+        // Redisplays the menu unless the user wants to quit.
         if (choice != 5) {
             ATM.menuUser(user, scanner);
         }
@@ -106,6 +123,11 @@ public class ATM {
 
     }
 
+    /**
+     * Prints the transaction history for the users specified account
+     * @param user the logged in User object
+     * @param scanner the scanner object used for the user input
+     */
     public static void showTransHistory(User user, Scanner scanner) {
 
         int accountChoice;
@@ -122,6 +144,11 @@ public class ATM {
         user.printTransHistory(accountChoice);
     }
 
+    /**
+     * Process transferring funds from one account to another
+     * @param user the logged in User object
+     * @param scanner the scanner object used for the user input
+     */
     public static void transferFunds(User user, Scanner scanner) {
         int fromAccount;
         int toAccount;
@@ -174,6 +201,11 @@ public class ATM {
 
     }
 
+    /**
+     * Process a fund withdrawl from an account
+     * @param user the logged in User object
+     * @param scanner The scanner object used for the user input
+     */
     public static void withdrawlFunds(User user, Scanner scanner) {
         int fromAccount;
         double amount;
@@ -215,6 +247,11 @@ public class ATM {
 
     }
 
+     /**
+     * Process a fund deposit to an account
+     * @param user the logged in User object
+     * @param scanner The scanner object used for the user input
+     */
     public static void depositFunds(User user, Scanner scanner) {
 
         int toAccount;
