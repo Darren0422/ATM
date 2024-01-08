@@ -96,7 +96,7 @@ The user is shown an account summary and prompted to select the account they wis
 <img width="1387" alt="Screenshot 2024-01-05 at 13 37 42" src="https://github.com/Darren0422/ATM/assets/134398985/1529a499-8c23-421a-8d7d-01c025278da7">
 
 ##### Quit
-The user quits the ATM applciation and is returned to the Login prompt. 
+The user quits the ATM application and they are returned to the Login prompt. 
 
 ## Credits
 [Darren Chen](https://github.com/Darren0422)
